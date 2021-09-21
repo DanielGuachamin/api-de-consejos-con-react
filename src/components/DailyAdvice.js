@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import { SearchOutlined } from "@ant-design/icons";
 import FavoriteAdvices from "./FavoriteAdvices";
 
-function DailyAdvice(props) {
+function DailyAdvice({ favorites, handleAddFavorite, handleDeleteAdvice }) {
   const [dailyAdvice, setDailyAdvice] = useState();
   const [changeAdvice, setChangeAdvice] = useState(0);
-  const [favoriteAdvices, setFavoriteAdvices] = useState([]);
 
   useEffect(() => {
-    const getMovies = async () => {
+    const getAdvices = async () => {
       const response = await fetch("https://api.adviceslip.com/advice");
       const adviceArray = await response.json();
       if (adviceArray) {
@@ -20,22 +19,11 @@ function DailyAdvice(props) {
       }
     };
 
-    getMovies();
+    getAdvices();
   }, [changeAdvice]);
-
-  const handleCatch = (message) => {
-    setFavoriteAdvices((prevState) => [...prevState, message]);
-  };
 
   const handleSearchAnother = () => {
     setChangeAdvice(changeAdvice + 1);
-  };
-
-  const handleDeleteAdvice = (adviceToDelete) => {
-    const newFavoriteList = favoriteAdvices.filter(
-      (advice, index) => index !== adviceToDelete
-    );
-    setFavoriteAdvices(newFavoriteList);
   };
 
   return (
@@ -51,7 +39,7 @@ function DailyAdvice(props) {
         <Col>
           <Button
             type="primary"
-            onClick={() => handleCatch(dailyAdvice.advice)}
+            onClick={() => handleAddFavorite(dailyAdvice.advice)}
           >
             Marcar como favorito
           </Button>
@@ -70,7 +58,7 @@ function DailyAdvice(props) {
         <br />
       ) : (
         <FavoriteAdvices
-          advices={favoriteAdvices}
+          advices={favorites}
           deleteAdvice={handleDeleteAdvice}
         />
       )}

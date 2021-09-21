@@ -1,1 +1,24 @@
 @import '~antd/dist/antd.css';
+
+h1 {
+    font-family: monospace;
+    font-weight: bold;
+    text-align: center;
+}
+
+p,td,Button {
+    font-family: monospace;
+    margin-left: 15px;
+}
+
+Button {
+    margin: 0px 20px;
+}
+
+.dailyAdvice {
+    padding-bottom: 40px;
+}
+
+.resultsAdvice {
+    padding: 10px 30px;
+}

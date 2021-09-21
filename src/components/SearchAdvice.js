@@ -1,8 +1,8 @@
+import "../styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import ResultsAdvice from "./ResultsAdvice";
-import FavoriteAdvices from "./FavoriteAdvices";
 
 function SearchAdvice({ handleAddFavorite }) {
   const [searchAdvice, setSearchAdvice] = useState();
@@ -45,7 +45,7 @@ function SearchAdvice({ handleAddFavorite }) {
           span: 8,
         }}
         wrapperCol={{
-          span: 16,
+          span: 10,
         }}
         initialValues={{
           remember: true,
@@ -72,14 +72,10 @@ function SearchAdvice({ handleAddFavorite }) {
             offset: 8,
             span: 16,
           }}
-        >
-          <Button type="primary" icon={<SearchOutlined />}>
-            Buscar
-          </Button>
-        </Form.Item>
+        ></Form.Item>
       </Form>
       {searchAdvice === undefined ? (
-        <br />
+        <h2>No hay coincidencias, ingresa una palabra clave</h2>
       ) : (
         <ResultsAdvice
           advicesList={searchAdvice}

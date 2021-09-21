@@ -1,3 +1,4 @@
+import "../styles/App.css";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "antd";
 import PropTypes from "prop-types";
@@ -27,41 +28,48 @@ function DailyAdvice({ favorites, handleAddFavorite, handleDeleteAdvice }) {
   };
 
   return (
-    <div>
-      <h1>Consejo del día</h1>
-      {dailyAdvice === undefined ? (
-        <p>¡Busque más consejos!, por el momento no hay consejos disponibles</p>
-      ) : (
-        <p>{dailyAdvice.advice}</p>
-      )}
-
+    <div className="dailyAdvice">
       <Row>
-        <Col>
-          <Button
-            type="primary"
-            onClick={() => handleAddFavorite(dailyAdvice.advice)}
-          >
-            Marcar como favorito
-          </Button>
+        <Col span={11}>
+          <h1>Consejo del día</h1>
+          {dailyAdvice === undefined ? (
+            <p>
+              ¡Busque más consejos!, por el momento no hay consejos disponibles
+            </p>
+          ) : (
+            <p>{dailyAdvice.advice}</p>
+          )}
+
+          <Row>
+            <Col>
+              <Button
+                type="primary"
+                onClick={() => handleAddFavorite(dailyAdvice.advice)}
+              >
+                Marcar como favorito
+              </Button>
+              <Button
+                type="primary"
+                icon={<SearchOutlined />}
+                onClick={handleSearchAnother}
+              >
+                Siguiente consejo
+              </Button>
+            </Col>
+          </Row>
         </Col>
-        <Col>
-          <Button
-            type="primary"
-            icon={<SearchOutlined />}
-            onClick={handleSearchAnother}
-          >
-            Siguiente consejo
-          </Button>
+        <Col span={1}></Col>
+        <Col span={12}>
+          {dailyAdvice === undefined ? (
+            <br />
+          ) : (
+            <FavoriteAdvices
+              advices={favorites}
+              deleteAdvice={handleDeleteAdvice}
+            />
+          )}
         </Col>
       </Row>
-      {dailyAdvice === undefined ? (
-        <br />
-      ) : (
-        <FavoriteAdvices
-          advices={favorites}
-          deleteAdvice={handleDeleteAdvice}
-        />
-      )}
     </div>
   );
 }

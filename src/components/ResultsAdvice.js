@@ -1,9 +1,10 @@
+import "../styles/App.css";
 import React from "react";
 import { Button } from "antd";
 
 function ResultsAdvice({ advicesList, handleAddFavorite }) {
   return (
-    <div>
+    <div className="resultsAdvice">
       <h1>Resultados de la búsqueda</h1>
       <table>
         <thead>

@@ -1,13 +1,23 @@
 import "../styles/App.css";
 import DailyAdvice from "./DailyAdvice";
 import SearchAdvice from "./SearchAdvice";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { message } from "antd";
 
 function App() {
   const [favoriteAdvices, setFavoriteAdvices] = useState([]);
 
-  const handleCatch = (message) => {
-    setFavoriteAdvices((prevState) => [...prevState, message]);
+  const handleCatch = (advice) => {
+    const newAdvices = [...favoriteAdvices];
+    let repetido = false;
+    newAdvices.forEach(function (value) {
+      if (value === advice) {
+        repetido = true;
+      }
+    });
+    repetido === true
+      ? message.error("¡Cuidado! Este consejo ya fue añadido a la lista")
+      : setFavoriteAdvices((prevState) => [...prevState, advice]);
   };
 
   const handleDeleteAdvice = (adviceToDelete) => {
